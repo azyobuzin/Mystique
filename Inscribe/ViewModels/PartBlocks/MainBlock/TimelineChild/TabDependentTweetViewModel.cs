@@ -9,6 +9,7 @@ using System.Windows.Media;
 using Dulcet.Twitter;
 using Dulcet.Twitter.Rest;
 using Inscribe.Common;
+using Inscribe.Communication;
 using Inscribe.Communication.Posting;
 using Inscribe.Configuration;
 using Inscribe.Configuration.Settings;
@@ -1510,6 +1511,63 @@ namespace Inscribe.ViewModels.PartBlocks.MainBlock.TimelineChild
             this.Parent.AddTopUser(parameter.TwitterUser.ScreenName);
         }
 
+        #endregion
+
+        #region GoUpstreamCommand
+        private ViewModelCommand _GoUpstreamCommand;
+
+        public ViewModelCommand GoUpstreamCommand
+        {
+            get
+            {
+                if (_GoUpstreamCommand == null)
+                {
+                    _GoUpstreamCommand = new ViewModelCommand(GoUpstream);
+                }
+                return _GoUpstreamCommand;
+            }
+        }
+
+        public void GoUpstream()
+        {
+            //bool started = false;
+            long id = this.Tweet.Status.Id;
+
+            this.Parent.TabProperty.FollowingLists
+                //.Do(list => started = true)
+                .ForEach(list => NotScheduledReceiving.ReceiveUpstreamListStatuses(list, id));
+
+            if ((this.Tweet.IsMentionToMe || this.Tweet.IsDirectMessage)
+                && this.Parent.TabProperty.TweetSources
+                .Select(filter => filter.ToQuery())
+                .Any(filter => filter.Contains("to:") || filter.Contains("dm")))
+            {
+                //started = true;
+
+                if (this.Tweet.IsDirectMessage)
+                {
+                    var dm = (TwitterDirectMessage)this.Tweet.Status;
+                    NotScheduledReceiving.ReceiveUpstreamDirectMessages(
+                        (AccountStorage.Get(dm.Recipient.NumericId) ?? AccountStorage.Get(dm.Sender.NumericId)),
+                        dm.Id
+                    );
+                }
+                else
+                {
+                    AccountStorage.Accounts
+                        .Where(a => RegularExpressions.AtRegex
+                            .Matches(this.Tweet.TweetText)
+                            .OfType<Match>()
+                            .Any(s => s.Value.Substring(1).Equals(a.ScreenName, StringComparison.CurrentCultureIgnoreCase)))
+                        .ForEach(a => NotScheduledReceiving.ReceiveUpstreamMentions(a, id));
+                }
+            }
+
+            //意味ない
+            //if (!started)
+            //    AccountStorage.Accounts.Where(a => a.IsFollowing(this.Tweet.Status.User.NumericId))
+            //        .ForEach(a => NotScheduledReceiving.ReceiveUpstreamHome(a, id));
+        }
         #endregion
 
         #endregion

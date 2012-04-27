@@ -338,6 +338,9 @@
                     <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Source="{StaticResource Conversation}" />
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Command="{Binding GoUpstreamCommand,
+                                        Mode=OneWay}"
+                      Header="これより前のツイートを取得"/>
             <MenuItem Command="{Binding SelectAllCommand,
                                         Mode=OneTime}"
                       Header="すべて選択(_A)"
