@@ -20,9 +20,10 @@ namespace Mystique
         {
             Application.Current.Exit += new ExitEventHandler(Exitting);
             DispatcherHelper.UIDispatcher = Dispatcher;
-#if !DEBUG
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-#endif
+
+            //改造が原因でレポート送られちゃったら申し訳ない
+            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             Initializer.Init();
             UpdateReceiver.StartSchedule();
         }
