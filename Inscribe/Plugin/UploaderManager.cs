@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Acuerdo.External.Uploader;
 using Inscribe.Configuration;
 
@@ -91,10 +92,7 @@ namespace Inscribe.Plugin
         private static bool IsRawImageUrl(string url)
         {
             return String.IsNullOrWhiteSpace(url) ||
-                url.EndsWith(".png") ||
-                url.EndsWith(".jpg") || url.EndsWith(".jpeg") || url.EndsWith(".jpe") ||
-                url.EndsWith(".bmp") || url.EndsWith(".dib") ||
-                url.EndsWith("gif");
+                Regex.IsMatch(url, @"\.(png|jpg|jpeg|jpe|bmp|dib|gif)(:[a-zA-Z]+)?$");
         }
 
         public static IUploader GetSuggestedUploader()
