@@ -25,6 +25,7 @@ namespace Inscribe.ViewModels.Dialogs.SettingSub
             this._fontFamilyIndex = Array.IndexOf(this.FontFamilies.ToArray(), curFF);
             this.FontSize = Setting.Instance.ExperienceProperty.FontSize;
             this.IgnoreTimeoutError = Setting.Instance.ExperienceProperty.IgnoreTimeoutError;
+            this.ShowSplashScreen = Setting.Instance.ExperienceProperty.ShowSplashScreen;
         }
 
         private bool _aloofUserMode;
@@ -135,6 +136,17 @@ namespace Inscribe.ViewModels.Dialogs.SettingSub
             }
         }
 
+        private bool _showSplashScreen;
+        public bool ShowSplashScreen
+        {
+            get { return _showSplashScreen; }
+            set
+            {
+                _showSplashScreen = value;
+                RaisePropertyChanged(() => ShowSplashScreen);
+            }
+        }
+
         public void Apply()
         {
             Setting.Instance.ExperienceProperty.UpdateKind = this._updateKind - 1;
@@ -146,6 +158,7 @@ namespace Inscribe.ViewModels.Dialogs.SettingSub
             }
             Setting.Instance.ExperienceProperty.FontSize = this.FontSize;
             Setting.Instance.ExperienceProperty.IgnoreTimeoutError = this.IgnoreTimeoutError;
+            Setting.Instance.ExperienceProperty.ShowSplashScreen = this.ShowSplashScreen;
         }
     }
 }

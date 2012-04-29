@@ -56,6 +56,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\krile.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Mystique.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Livet, Version=0.9.2011.429, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -92,6 +95,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Program.cs" />
     <Compile Include="Views\Behaviors\Actions\FrameworkSetFocusAction.cs" />
     <Compile Include="Views\Behaviors\Actions\InvokePassThruCommandAction.cs" />
     <Compile Include="Views\Behaviors\Actions\RichTextBoxTextSelectionAction.cs" />

@@ -30,9 +30,6 @@ namespace Inscribe.Core
             // プラグインのロード
             PluginLoader.Load();
 
-            // 設定のロード
-            Setting.Initialize();
-
             // APIエンドポイントのオーバーライト
             if (!String.IsNullOrEmpty(Setting.Instance.KernelProperty.TwitterApiEndpoint))
             {

@@ -13,6 +13,7 @@ namespace Inscribe.Configuration.Settings
             this.FontSize = 11.5;
             this.FontFamily = "Meiryo";
             this.IgnoreTimeoutError = true;
+            this.ShowSplashScreen = true;
         }
 
         #region General experience
@@ -51,5 +52,7 @@ namespace Inscribe.Configuration.Settings
         public double FontSize { get; set; }
 
         public bool IgnoreTimeoutError { get; set; }
+
+        public bool ShowSplashScreen { get; set; }
     }
 }

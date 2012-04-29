@@ -33,6 +33,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <TextBlock Margin="4,2"
@@ -78,6 +79,12 @@
                           IsChecked="{Binding IgnoreTimeoutError}"
                           Visibility="{Binding IsTranscender,
                                                Converter={StaticResource BoolVisibleConverter}}" />
+                <CheckBox Grid.Row="3"
+                          Grid.ColumnSpan="2"
+                          Margin="4"
+                          VerticalAlignment="Top"
+                          Content="スプラッシュスクリーンを表示する(_S)"
+                          IsChecked="{Binding ShowSplashScreen}" />
             </Grid>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="25,0,0,0">
                 <TextBlock Foreground="DimGray" Text="Krileと運命を共にする覚悟のある方専用です。" />
