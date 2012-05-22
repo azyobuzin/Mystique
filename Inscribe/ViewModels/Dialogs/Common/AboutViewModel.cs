@@ -22,6 +22,9 @@ namespace Inscribe.ViewModels.Dialogs.Common
             new ContributorViewModel("凡骨A", "bonkotsua"),
             new ContributorViewModel("るみぃ", "lummy_ts"),
             new ContributorViewModel("recov", "recov"),
+            new ContributorViewModel("Hotspring", "hotspring_r"),
+            new ContributorViewModel("アリサ", "ALYSSA_MNSN"),
+            new ContributorViewModel("下呂子", "Geroko"),
         };
 
         public static bool IsPremiumStatic
@@ -29,7 +32,7 @@ namespace Inscribe.ViewModels.Dialogs.Common
             get
             {
                 return AccountStorage.Accounts
-                   .Any(i => AboutViewModel.contributors.Select(c => c.ScreenName).Any(s => s == i.ScreenName));
+                   .Any(i => AboutViewModel.contributors.Select(c => c.ScreenName).Any(s => s.Equals(i.ScreenName, StringComparison.CurrentCultureIgnoreCase)));
             }
         }
 
