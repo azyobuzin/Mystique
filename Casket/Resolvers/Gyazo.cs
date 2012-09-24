@@ -2,17 +2,17 @@
 
 namespace Casket.Resolvers
 {
-    public class YFrog : IResolver
+    public class Gyazo : IResolver
     {
         public bool IsResolvable(string url)
         {
-            return url.StartsWith("http://yfrog.com/");
+            return url.StartsWith("http://gyazo.com/");
         }
 
         public string Resolve(string url)
         {
             if (IsResolvable(url))
-                return url + ":medium";
+                return url + ".png";
             else
                 return null;
         }
