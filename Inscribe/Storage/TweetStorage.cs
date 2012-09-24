@@ -335,7 +335,7 @@ namespace Inscribe.Storage
                     {
                         String expand = null;
                         if (i.GetChildValue("media_url") != null)
-                            expand = i.GetChildValue("media_url").Value + ":large";
+                            expand = i.GetChildValue("media_url").Value;
                         if (String.IsNullOrWhiteSpace(expand) && i.GetChildValue("expanded_url") != null)
                             expand = i.GetChildValue("expanded_url").Value;
                         if (String.IsNullOrWhiteSpace(expand) && i.GetChildValue("url") != null)
