@@ -797,7 +797,7 @@ namespace Inscribe.ViewModels.PartBlocks.MainBlock.TimelineChild
         public void SearchGoogle()
         {
             Browser.Start(
-                "http://www.google.co.jp/search?q=" + this.SelectedText);
+                "http://www.google.co.jp/search?q=" + Uri.EscapeDataString(this.SelectedText));
         }
         #endregion
 
