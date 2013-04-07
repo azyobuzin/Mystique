@@ -348,8 +348,13 @@ namespace Inscribe.Storage
                             {
                                 //一旦内容を元の状態に戻す（参照：XmlParser.ParseString）
                                 string orgtext = status.Text.Replace("&", "&amp;").Replace(">", "&gt;").Replace("<", "&lt;");
-                                string text = orgtext.Substring(0, indices[0]) +
-                                    expand + orgtext.Substring(indices[1]);
+
+                                // Considering surrogate pairs and Combining Character.
+                                string text =
+                                    SubstringForSurrogatePaire(orgtext, 0, indices[0])
+                                    + expand
+                                    + SubstringForSurrogatePaire(orgtext, indices[1]);
+
                                 //再度処理を施す
                                 status.Text = text.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&");
                             }
@@ -358,6 +363,33 @@ namespace Inscribe.Storage
                 }
             }
             catch { }
+        }
+
+        private static string SubstringForSurrogatePaire(string str, int startIndex, int length = -1)
+        {
+            var s = GetLengthForSurrogatePaire(str, startIndex, 0);
+
+            if (length == -1)
+            {
+                return str.Substring(s);
+            }
+
+            var l = GetLengthForSurrogatePaire(str, length, s);
+            return str.Substring(s, l);
+        }
+
+        private static int GetLengthForSurrogatePaire(string str, int len, int s)
+        {
+            var l = 0;
+            for (int i = 0; i < len; i++)
+            {
+                if (char.IsHighSurrogate(str[l + s]))
+                {
+                    l++;
+                }
+                l++;
+            }
+            return l;
         }
 
         /// <summary>

@@ -28,7 +28,11 @@ namespace Inscribe.ViewModels.Dialogs.Common
             new ContributorViewModel("whitebell", "whitebell"),
             new ContributorViewModel("キスショさん", "__kiss"),
             new ContributorViewModel("れき", "reki_frequent"),
-            new ContributorViewModel("月夜見命", "tsukuyomi_ls"),
+            new ContributorViewModel("月夜見命", "ls_akari"),
+            new ContributorViewModel("トランキ", "trankie00"),
+            new ContributorViewModel("めびう寿司", "catina013"),
+            new ContributorViewModel("くりゅー", "chry545"),
+            new ContributorViewModel("aetos382", "aetos382")
         };
 
         public static bool IsPremiumStatic
