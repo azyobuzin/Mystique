@@ -83,6 +83,7 @@
     <Compile Include="Filter\Filters\Text\FilterUserLocationStar.cs" />
     <Compile Include="Filter\Filters\Text\FilterUserNameStar.cs" />
     <Compile Include="Filter\Filters\Text\FilterUserWebStar.cs" />
+    <Compile Include="Filter\Filters\Text\FilterViaStar.cs" />
     <Compile Include="Filter\IUserFilter.cs" />
     <Compile Include="Filter\Filters\ScreenName\FilterTo.cs" />
     <Compile Include="Filter\MatchingUtil.cs" />
